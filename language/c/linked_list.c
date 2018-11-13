@@ -4,17 +4,18 @@
 struct Node {
     int val;
     struct Node* next;
-}  Node;
+};
 
+typedef struct Node Node;
 
-struct Node* build_list(int arr[], int len) {
+Node* build_list(int arr[], int len) {
     if(len <= 0) return NULL;
 
-    struct Node* head = NULL;
-    struct Node* tail = NULL;
+    Node* head = NULL;
+    Node* tail = NULL;
     
     for(int i = 0; i < len; i++) {
-        struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+        Node* node = (Node*)malloc(sizeof(Node));
         node->val = arr[i];
         node->next = NULL;
 
@@ -31,14 +32,14 @@ struct Node* build_list(int arr[], int len) {
 }
 
 
-struct Node* add_node(struct Node* head, int val) {
-    struct Node* node = (struct Node*) malloc(sizeof(struct Node));
+Node* add_node(Node* head, int val) {
+    Node* node = (Node*) malloc(sizeof(Node));
     node->val = val;
     node->next = NULL;
     
     if (head == NULL) return node;
 
-    struct Node* tail = head;
+    Node* tail = head;
     while (tail->next) {
         tail = tail->next;
     }
@@ -48,11 +49,11 @@ struct Node* add_node(struct Node* head, int val) {
 }
 
 
-struct Node* delete_node(struct Node* head, int val) {
-    struct Node* node = head;
+Node* delete_node(Node* head, int val) {
+    Node* node = head;
 
     /* node is the node to delete, pre is the node before node to delete. */
-    struct Node* pre = NULL;
+    Node* pre = NULL;
     while(node && node->val != val) {
         pre = node;
         node = node->next;
@@ -76,7 +77,7 @@ struct Node* delete_node(struct Node* head, int val) {
 }
 
 
-void print_list(struct Node* head) {
+void print_list(Node* head) {
     while (head) {
         printf("%d ", head->val);
         head = head->next;
@@ -88,10 +89,10 @@ void print_list(struct Node* head) {
 int main(void) {
     int arr[5] = {1, 3, 5, 7, 9};
     int len = 5;
-    struct Node* head = build_list(arr, len);
+    Node* head = build_list(arr, len);
     print_list(head);
     
-    struct Node* head_2 = NULL;
+    Node* head_2 = NULL;
     for (int i = 0; i < len; i++) {
         head_2 = add_node(head_2, arr[i]);
     }
