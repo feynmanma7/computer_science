@@ -78,15 +78,36 @@ void heap_sort(int *heap, int len) {
     }
 }
 
+void top_small_K(int *arr, int len, int K) {
+
+    int heap[K];
+    for (int i = 0; i < K; i++) {
+        heap[i] = arr[i];
+    }
+
+    build_max_heap(heap, K);
+
+    for(int i = K; i < len; i++) {
+        if (heap[0] > arr[i]) {
+            heap[0] = arr[i];
+            max_heapify(heap, K, 0);
+        }
+    }
+
+    print_heap(heap, K);
+}
+
 int main(void) {
     int len = 9;
     int heap[] = {1, 3, 5, 7, 9, 8, 6, 4, 2};
-
 
     //build_max_heap(heap, len);
 
     heap_sort(heap, len);
     print_heap(heap, len);
+
+    int K = 2;
+    top_small_K(heap, len, K);
 
     return 0;
 }
